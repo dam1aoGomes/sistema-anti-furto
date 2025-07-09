@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { equipamentService } from "./equipament.service";
 
 async function findAll(req : Request, res : Response) {
+    //debug__
+    //todo fazer buscar pora querys ?whereName=Sensor&whereRFID=ABCDE ...
+    console.log('Query params recebidos:', req.query.whereName);
     const equipaments = await equipamentService.findAll();
     res.json(equipaments);
 }
