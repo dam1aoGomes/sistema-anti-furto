@@ -48,6 +48,9 @@ Este projeto utiliza variáveis de ambiente para configurações sensíveis e es
 
     # JWT (se aplicável)
     JWT_SECRET=sua_chave_secreta_muito_forte
+
+    # Send Grid Api
+    SENDGRID_API_KEY=sua_apikey_send_grid
     ```
 
     **Importante:** Nunca commite seu arquivo `.env` para o controle de versão\! Ele já está incluído no `.gitignore`.
