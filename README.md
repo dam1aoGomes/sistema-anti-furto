@@ -1,6 +1,6 @@
 ## **Guia de Instalação e Execução do Projeto**
 
-Este guia detalha os passos necessários para configurar, instalar e executar o projeto [Nome do Seu Projeto] em seu ambiente de desenvolvimento.
+Este guia detalha os passos necessários para configurar, instalar e executar o projeto em seu ambiente de desenvolvimento.
 
 -----
 
