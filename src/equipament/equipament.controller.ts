@@ -6,6 +6,25 @@ async function findAll(req : Request, res : Response) {
     res.json(equipaments);
 }
 
+async function findById(req : Request, res : Response) {
+    const id = req.params.id;
+    try {
+        const parsedId = Number.parseInt(id);
+        const equipament = await equipamentService.findById(parsedId);
+        if(!equipament) {
+            res.status(404).json({
+                message : "Equipamento inexistente"
+            })
+        }
+        res.json(equipament);
+    } catch (erro){
+        res.status(500).json({
+            message : "Erro ao buscar equipamento por id",
+            erro
+        });
+    }
+}
+
 async function create(req: Request, res: Response) {
     const {name,type,location,rfid,responsible} = req.body;
     const equipament = await equipamentService.create(name,type,location,rfid,responsible);
@@ -20,6 +39,7 @@ async function alertOutRange(req: Request, res: Response) {
 
 export const equipamentController = {
     findAll,
+    findById,
     create,
     alertOutRange
 }

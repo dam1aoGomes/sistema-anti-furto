@@ -7,6 +7,15 @@ async function findAll() {
     return equipaments;
 }
 
+async function findById(id: number) {
+    const equipament = await prisma.equipment.findUnique({
+        where : {
+            id: id
+        }
+    });
+    return equipament;
+}
+
 async function create(name:string,type:string,location:string,rfid:string,responsible:string) {
     const equipament = await prisma.equipment.create({
         data : {
@@ -36,6 +45,7 @@ async function alertOutRange(rfid: string) {
 
 export const equipamentService = {
     findAll,
+    findById,
     create,
     alertOutRange
 }

@@ -11,3 +11,9 @@ export const createEquipmentSchema = z.object({
 export const alertOutRangeSchema = z.object({
   rfid: z.string().min(1, 'RFID é obrigatório')
 });
+
+export const findByIdSchema = z.object({
+  id: z.string()
+    .transform((val) => Number(val)) // transforma em número
+    .refine((val) => !isNaN(val), { message: 'ID inválido: deve ser um número' }),
+})
