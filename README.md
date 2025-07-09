@@ -24,7 +24,7 @@ Primeiro, clone o repositório do projeto para sua máquina local:
 
 ```bash
 git clone https://github.com/dam1aoGomes/sistema-anti-furto.git
-cd seu-projeto
+cd sistema-anti-furto
 ```
 
 #### **2.2. Variáveis de Ambiente**
