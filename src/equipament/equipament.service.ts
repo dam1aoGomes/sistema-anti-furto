@@ -1,9 +1,28 @@
 import prisma from "../prisma-client/prisma"
 import { sendAlertEmail } from "../utils/sendEmail";
+import { EquipmentFilters } from "../schema/equipament.schema";
 
-
-async function findAll() {
-    const equipaments = await prisma.equipment.findMany()
+async function findAll(filters: EquipmentFilters) {
+    const { whereName, type, location, responsible, inRange } = filters;
+    const equipaments = await prisma.equipment.findMany({
+    where: {
+      ...(whereName && {
+        name: {
+          contains: whereName,
+          mode: 'insensitive',
+        },
+      }),
+      ...(type && { type: { equals: type, mode: 'insensitive' } }),
+      ...(location && { location: { contains: location, mode: 'insensitive' } }),
+      ...(responsible && {
+        responsible: {
+          contains: responsible,
+          mode: 'insensitive',
+        },
+      }),
+      ...(typeof inRange === 'boolean' && { isInRange: inRange }),
+    },
+  })
     return equipaments;
 }
 

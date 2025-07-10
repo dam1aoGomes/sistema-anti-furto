@@ -1,26 +1,16 @@
 import { Router } from "express";
 import { authenticateToken } from "../middlewares/auth";
-import { validateBody, validateParams } from "../middlewares/validate";
-import { createEquipmentSchema, alertOutRangeSchema, findByIdSchema} from "../schema/equipament.schema";
+import { validateBody, validateParams, validateQuery } from "../middlewares/validate";
+import { createEquipmentSchema, alertOutRangeSchema, findByIdSchema, querySchema} from "../schema/equipament.schema";
 import { equipamentController } from "./equipament.controller";
 
 const equipamentRouter = Router()
 
 // findAll
-equipamentRouter.get('/',authenticateToken,equipamentController.findAll);
+equipamentRouter.get('/',authenticateToken,validateQuery(querySchema),equipamentController.findAll);
 
 // findById
 equipamentRouter.get('/:id',authenticateToken,validateParams(findByIdSchema),equipamentController.findById)
-
-// findByName
-
-// findByType
-
-// findByIsInRange
-
-// findByIsOutRange
-
-// findByRFID
 
 // create new equipament
 equipamentRouter.post('/',authenticateToken,validateBody(createEquipmentSchema),equipamentController.create);

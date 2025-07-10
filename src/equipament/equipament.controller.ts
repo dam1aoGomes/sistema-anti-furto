@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { equipamentService } from "./equipament.service";
+import { EquipmentFilters} from "../schema/equipament.schema";
+
 
 async function findAll(req : Request, res : Response) {
-    //debug__
-    //todo fazer buscar pora querys ?whereName=Sensor&whereRFID=ABCDE ...
-    console.log('Query params recebidos:', req.query.whereName);
-    const equipaments = await equipamentService.findAll();
+    const filters = req.validatedQuery as EquipmentFilters; // já validado pelo middleware
+    const equipaments = await equipamentService.findAll(filters);
     res.json(equipaments);
 }
 
