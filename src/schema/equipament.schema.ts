@@ -27,6 +27,21 @@ export const querySchema = z.object({
     .union([z.literal('true'), z.literal('false')]) // porque query sempre vem como string
     .transform((val) => val === 'true')
     .optional(),
+  page: z
+    .string()
+    .optional()
+    .transform((val) => (val ? parseInt(val, 10) : 1))
+    .refine((val) => Number.isInteger(val) && val > 0, {
+      message: 'page deve ser um número inteiro positivo',
+    }),
+
+  limit: z
+    .string()
+    .optional()
+    .transform((val) => (val ? parseInt(val, 10) : 10))
+    .refine((val) => Number.isInteger(val) && val > 0, {
+      message: 'limit deve ser um número inteiro positivo',
+    }),
 });
 
 export type EquipmentFilters = z.infer<typeof querySchema>;
