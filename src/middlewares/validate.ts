@@ -43,7 +43,10 @@ export const validateQuery = (schema: ZodSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
     const result = schema.safeParse(req.query);
     if (!result.success) {
-      return res.status(400).json({ error: result.error.flatten() });
+      return res.status(400).json({ 
+        message: 'Dados inválidos',
+        details: result.error.flatten() 
+      });
     }
 
     // substitui req.query com os dados validados (tipados e seguros)
