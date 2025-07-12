@@ -10,6 +10,13 @@ app.use('/api',authRouter);
 
 app.use('/api/equipament',equipamentRouter);
 
+//index route
+app.get('/',(req,res)=>{
+  res.json({
+    message : 'Servidor Rodando'
+  })
+})
+
 // Rotas inexistentes (404)
 app.use((req, res) => {
   res.status(404).json({
