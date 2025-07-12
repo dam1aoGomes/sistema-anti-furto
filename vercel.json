@@ -8,8 +8,8 @@
   ],
   "functions": {
     "src/server.ts": {
-      "includeFiles": [
-        "prisma/**",
+      "files": [
+        "prisma/schema.prisma",
         "node_modules/.prisma/client/**"
       ]
     }
