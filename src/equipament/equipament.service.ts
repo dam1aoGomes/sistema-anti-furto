@@ -1,48 +1,76 @@
 import prisma from "../prisma-client/prisma"
 import { sendAlertEmail } from "../utils/sendEmail";
 import { EquipmentFilters } from "../schema/equipament.schema";
-import { Prisma } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 async function findAll(filters: EquipmentFilters) {
   const { whereName, type, location, responsible, inRange, page = 1, limit = 10, } = filters;
 
-  const where = {
-    ...(whereName && {
-      name: {
-        contains: whereName,
-        mode: Prisma.QueryMode.insensitive,
-      },
-    }),
-    ...(type && {
-      type: {
-        contains: type,
-        mode: Prisma.QueryMode.insensitive,
-      },
-    }),
-    ...(location && {
-      location: {
-        contains: location,
-        mode: Prisma.QueryMode.insensitive,
-      },
-    }),
-    ...(responsible && {
-      responsible: {
-        contains: responsible,
-        mode: Prisma.QueryMode.insensitive,
-      },
-    }),
-    ...(typeof inRange === 'boolean' && {
-      isInRange: inRange,
-    }),
-  };
-
   const [data, total] = await Promise.all([
     prisma.equipment.findMany({
-      where,
+      where: {
+        ...(whereName && {
+          name: {
+            contains: whereName,
+            mode: 'insensitive',
+          },
+        }),
+        ...(type && {
+          type: {
+            contains: type,
+            mode: 'insensitive',
+          },
+        }),
+        ...(location && {
+          location: {
+            contains: location,
+            mode: 'insensitive',
+          },
+        }),
+        ...(responsible && {
+          responsible: {
+            contains: responsible,
+            mode: 'insensitive',
+          },
+        }),
+        ...(typeof inRange === 'boolean' && {
+          isInRange: inRange,
+        }),
+      },
       skip: (page - 1) * limit,
       take: limit,
     }),
-    prisma.equipment.count({ where }),
+    prisma.equipment.count({
+      where: {
+        ...(whereName && {
+          name: {
+            contains: whereName,
+            mode: 'insensitive',
+          },
+        }),
+        ...(type && {
+          type: {
+            contains: type,
+            mode: 'insensitive',
+          },
+        }),
+        ...(location && {
+          location: {
+            contains: location,
+            mode: 'insensitive',
+          },
+        }),
+        ...(responsible && {
+          responsible: {
+            contains: responsible,
+            mode: 'insensitive',
+          },
+        }),
+        ...(typeof inRange === 'boolean' && {
+          isInRange: inRange,
+        }),
+      }
+    }),
   ]);
 
   return {
