@@ -18,6 +18,17 @@ export const findByIdSchema = z.object({
     .refine((val) => !isNaN(val), { message: 'ID inválido: deve ser um número' }),
 });
 
+export const updateByRFIDParam = z.object({
+  rfid: z.string().min(1, 'RFID valido é obrigatório')
+});
+
+export const updateByRFIDBody = z.object({
+  name: z.string().min(1, 'Nome é obrigatório'),
+  type: z.string().min(1, 'Tipo é obrigatório'),
+  location: z.string().min(1, 'Localização é obrigatória'),
+  responsible: z.string().optional().or(z.literal('')), 
+})
+
 export const querySchema = z.object({
   whereName: z.string().optional(),
   type: z.string().optional(),
