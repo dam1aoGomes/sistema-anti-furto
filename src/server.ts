@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 dotenv.config();
 
 //_deploy mode_
-//export default app;
+export default app;
 
 //_dev mode_
 /*app.listen(3000,()=>{
