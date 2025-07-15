@@ -5,14 +5,18 @@ import cors from 'cors';
 
 const app = express();
 
+// ✅ Primeiro aplica o CORS
+app.use(cors({
+  origin: '*', // ou '*'
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+}))
+
 app.use(express.json());
 
 app.use('/api',authRouter);
 
 app.use('/api/equipament',equipamentRouter);
-
-// Configuração básica (libera para qualquer origem)
-app.use(cors())
 
 //index route
 app.get('/',(req,res)=>{
