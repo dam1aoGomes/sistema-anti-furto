@@ -144,7 +144,7 @@ async function alertOutRange(rfid: string) {
   }
   // Marcar como fora do alcance
   await prisma.equipment.update({
-    where: { rfid },
+    where: { rfid : rfid },
     data: { isInRange: false },
   });
   // send email
@@ -153,7 +153,7 @@ async function alertOutRange(rfid: string) {
 
 async function changeStatus(rfid : string) {
     const equipament = await prisma.equipment.update({
-      where : { rfid },
+      where : { rfid : rfid},
       data : { isInRange : true}
     })
     return equipament;
