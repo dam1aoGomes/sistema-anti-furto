@@ -16,7 +16,7 @@ equipamentRouter.get('/:id',authenticateToken,validateParams(findByIdSchema),equ
 equipamentRouter.post('/',authenticateToken,validateBody(createEquipmentSchema),equipamentController.create);
 
 // update equipament by rfid
-equipamentRouter.put('/:rfid',validateParams(updateByRFIDParam),validateBody(updateByRFIDBody),equipamentController.updateByRFID)
+equipamentRouter.put('/:rfid',authenticateToken,validateParams(updateByRFIDParam),validateBody(updateByRFIDBody),equipamentController.updateByRFID)
 
 // alert-out-of-range
 equipamentRouter.post('/alert-out-of-range',validateBody(alertOutRangeSchema),equipamentController.alertOutRange);
