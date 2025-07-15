@@ -1,6 +1,7 @@
 import express from "express";
 import authRouter from "./auth/auth.route";
 import equipamentRouter from "./equipament/equipament.route";
+import cors from 'cors';
 
 const app = express();
 
@@ -9,6 +10,9 @@ app.use(express.json());
 app.use('/api',authRouter);
 
 app.use('/api/equipament',equipamentRouter);
+
+// Configuração básica (libera para qualquer origem)
+app.use(cors())
 
 //index route
 app.get('/',(req,res)=>{
