@@ -128,6 +128,15 @@ async function updateByRFID(rfid: string, name: string, type: string, location: 
   return equipament;
 }
 
+async function deleteByRFID(rfid: string) {
+  const equipament = await prisma.equipment.delete({
+    where : {
+      rfid : rfid
+    }
+  });
+  return equipament;
+}
+
 async function alertOutRange(rfid: string) {
   const equipment = await prisma.equipment.findUnique({ where: { rfid } });
   if (!equipment) {
@@ -139,7 +148,7 @@ async function alertOutRange(rfid: string) {
     data: { isInRange: false },
   });
   // send email
-  await sendAlertEmail("damiao28.contato@gmail.com", equipment.name);
+  await sendAlertEmail("gislenojr@alu.ufc.br", equipment.name);
 }
 
 export const equipamentService = {
@@ -148,5 +157,6 @@ export const equipamentService = {
   findByRFID,
   create,
   updateByRFID,
+  deleteByRFID,
   alertOutRange
 }

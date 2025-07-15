@@ -72,6 +72,24 @@ async function updateByRFID(req: Request, res: Response) {
     }
 }
 
+async function deleteByRFID(req: Request, res: Response) {
+    const rfid = req.params.rfid;
+    try {
+        const equipament = await equipamentService.deleteByRFID(rfid);
+        if (!equipament) {
+            res.status(404).json({
+                message : "Equipamento não encontrado"
+            });
+        }  
+        res.json(equipament);
+    } catch (erro) {
+        res.status(500).json({
+            message: "Erro ao deletar equipamento",
+            erro
+        })
+    }
+}
+
 async function alertOutRange(req: Request, res: Response) {
     const { rfid } = req.body;
     try {
@@ -90,5 +108,6 @@ export const equipamentController = {
     findById,
     create,
     updateByRFID,
+    deleteByRFID,
     alertOutRange
 }

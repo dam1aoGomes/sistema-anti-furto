@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { authenticateToken } from "../middlewares/auth";
 import { validateBody, validateParams, validateQuery } from "../middlewares/validate";
-import { createEquipmentSchema, alertOutRangeSchema, findByIdSchema, querySchema, updateByRFIDParam, updateByRFIDBody} from "../schema/equipament.schema";
+import { createEquipmentSchema, alertOutRangeSchema, findByIdSchema, querySchema, updateByRFIDParam, updateByRFIDBody, deleteByRFIDParam} from "../schema/equipament.schema";
 import { equipamentController } from "./equipament.controller";
 
 const equipamentRouter = Router()
@@ -17,6 +17,9 @@ equipamentRouter.post('/',authenticateToken,validateBody(createEquipmentSchema),
 
 // update equipament by rfid
 equipamentRouter.put('/:rfid',authenticateToken,validateParams(updateByRFIDParam),validateBody(updateByRFIDBody),equipamentController.updateByRFID)
+
+// delete by rdif
+equipamentRouter.delete('/:rfid',authenticateToken,validateParams(deleteByRFIDParam),equipamentController.deleteByRFID)
 
 // alert-out-of-range
 equipamentRouter.post('/alert-out-of-range',validateBody(alertOutRangeSchema),equipamentController.alertOutRange);

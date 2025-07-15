@@ -29,6 +29,10 @@ export const updateByRFIDBody = z.object({
   responsible: z.string().optional().or(z.literal('')), 
 })
 
+export const deleteByRFIDParam = z.object({
+  rfid: z.string().min(1, 'RFID valido é obrigatório')
+});
+
 export const querySchema = z.object({
   whereName: z.string().optional(),
   type: z.string().optional(),
