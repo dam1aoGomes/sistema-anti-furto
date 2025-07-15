@@ -103,11 +103,30 @@ async function alertOutRange(req: Request, res: Response) {
     }
 }
 
+async function changeStatus(req: Request, res: Response) {
+    const rfid = req.params.rfid;
+    try {
+        const equipament = equipamentService.changeStatus(rfid);
+        if(!equipament) {
+            res.status(404).json({
+                message : "Equipamento não encontrado"
+            });   
+        }
+        res.json(equipament)
+    } catch (erro){
+        res.status(500).json({
+            message: "Erro ao mudar status",
+            erro
+        })   
+    }
+}
+
 export const equipamentController = {
     findAll,
     findById,
     create,
     updateByRFID,
     deleteByRFID,
-    alertOutRange
+    alertOutRange,
+    changeStatus
 }

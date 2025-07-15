@@ -151,6 +151,14 @@ async function alertOutRange(rfid: string) {
   await sendAlertEmail("gislenojr@alu.ufc.br", equipment.name);
 }
 
+async function changeStatus(rfid : string) {
+    const equipament = await prisma.equipment.update({
+      where : { rfid },
+      data : { isInRange : true}
+    })
+    return equipament;
+}
+
 export const equipamentService = {
   findAll,
   findById,
@@ -158,5 +166,6 @@ export const equipamentService = {
   create,
   updateByRFID,
   deleteByRFID,
-  alertOutRange
+  alertOutRange,
+  changeStatus
 }
