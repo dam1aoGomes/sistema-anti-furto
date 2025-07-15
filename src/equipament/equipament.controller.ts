@@ -106,7 +106,7 @@ async function alertOutRange(req: Request, res: Response) {
 async function changeStatus(req: Request, res: Response) {
     const rfid = req.params.rfid;
     try {
-        const equipament = equipamentService.changeStatus(rfid);
+        const equipament = await equipamentService.changeStatus(rfid);
         if(!equipament) {
             res.status(404).json({
                 message : "Equipamento não encontrado"
