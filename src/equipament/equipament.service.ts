@@ -113,6 +113,21 @@ async function create(name: string, type: string, location: string, rfid: string
   return equipament;
 }
 
+async function updateByRFID(rfid: string, name: string, type: string, location: string, responsible : string) {
+  const equipament = await prisma.equipment.update({
+    where : {
+      rfid : rfid
+    },
+    data : {
+      name : name,
+      type : type,
+      location : location,
+      responsible : responsible
+    }
+  });
+  return equipament;
+}
+
 async function alertOutRange(rfid: string) {
   const equipment = await prisma.equipment.findUnique({ where: { rfid } });
   if (!equipment) {
@@ -132,5 +147,6 @@ export const equipamentService = {
   findById,
   findByRFID,
   create,
+  updateByRFID,
   alertOutRange
 }
