@@ -22,7 +22,7 @@ equipamentRouter.put('/:rfid',authenticateToken,validateParams(updateByRFIDParam
 equipamentRouter.delete('/:rfid',authenticateToken,validateParams(deleteByRFIDParam),equipamentController.deleteByRFID)
 
 // change status by rfid
-equipamentRouter.put('/change-status',authenticateToken,validateParams(changeStatusParam),equipamentController.changeStatus);
+equipamentRouter.put('/change-status/:rfid',authenticateToken,validateParams(changeStatusParam),equipamentController.changeStatus);
 
 // alert-out-of-range
 equipamentRouter.post('/alert-out-of-range',validateBody(alertOutRangeSchema),equipamentController.alertOutRange);
